@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: tx-manager
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: xue$Xin+2@!3
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/tx-manager?serverTimezone=GMT+8&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    username: root
+    password: root
+
+server:
+  port: 7970
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:11120/eureka/
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+
+tx-lcn:
+  manager:
+    host: 127.0.0.1
+    port: 8070
+    heart-time: 15000
+    dtx-time: 30000
+    concurrent-level: 128
+  message:
+    netty:
+      attr-delay-time: 10000
+  logger:
+    enabled: true
+

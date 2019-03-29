@@ -1,0 +1,33 @@
+server:
+  port: 11200  # HTTP (Tomcat) port
+  tomcat:
+    uri-encoding: UTF-8
+    max-http-header-size: 10000000
+
+spring:
+  application:
+    name: SRV-C # Service registers under this name
+  profiles:
+    active: local
+
+jdbc:
+  driver:  com.mysql.jdbc.Driver
+  url:  jdbc:mysql://127.0.0.1:3306/txlcn-demo?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+  username:  test
+  password:  test
+
+---
+#本地开发环境
+spring:
+  profiles: local
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:11120/eureka/ # 可配置多个地址
+  healthcheck:
+    enabled: true
+  instance:
+    prefer-ip-address: true   #服务之间调用时，指定IP调用
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5

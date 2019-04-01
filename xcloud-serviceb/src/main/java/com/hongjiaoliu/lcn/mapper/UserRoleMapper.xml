@@ -3,10 +3,11 @@
 <mapper namespace="com.hongjiaoliu.lcn.mapper.UserRoleMapper">
 
     <insert id="addUserRole">
-        insert into userRole(userID,role) VALUES (#{userID},#{role});
+        insert into userRole(userID,role,created) VALUES (#{userID},#{role},#{created});
     </insert>
 
     <insert id="addUserRoleWithSqlError">
-        insert into userRole(userID,role) VALUES #{userID},#{role};
+        insert into userRole(userID,role,created) VALUES #{userID},#{role},#{created};
     </insert>
+
 </mapper>

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * @author liuhongjao
  * @date 2019/3/28 21:17
@@ -30,7 +32,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Transactional
 	@LcnTransaction(propagation = DTXPropagation.SUPPORTS)
 	public void addUserRole(Long userID, Integer role) {
-		userRoleMapper.addUserRole(userID,role);
+		userRoleMapper.addUserRole(userID,role,new Date());
 	}
 
 	/**
@@ -43,7 +45,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Transactional
 	@LcnTransaction(propagation = DTXPropagation.SUPPORTS)
 	public void addUserRoleWithRuntimeException(Long userID, Integer role) {
-		userRoleMapper.addUserRole(userID,role);
+		userRoleMapper.addUserRole(userID,role,new Date());
 		int i = 20/0;
 	}
 
@@ -57,7 +59,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Transactional
 	@LcnTransaction(propagation = DTXPropagation.SUPPORTS)
 	public void addUserRoleWithSqlException(Long userID, Integer role) {
-		userRoleMapper.addUserRoleWithSqlError(userID,role);
+		userRoleMapper.addUserRoleWithSqlError(userID,role,new Date());
 	}
 
 }

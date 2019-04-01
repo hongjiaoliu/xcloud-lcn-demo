@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hongjiaoliu.lcn.mapper.UserMapper">
 
-    <insert id="add"  keyProperty="id" useGeneratedKeys="true" parameterType="com.hongjiaoliu.lcn.entity.User">
-        insert into User(name,age) VALUES (#{user.name},#{user.age});
+    <insert id="add"  keyProperty="user.id" useGeneratedKeys="true" parameterType="com.hongjiaoliu.lcn.entity.User">
+        insert into User(name,age,created) VALUES (#{user.name},#{user.age},#{user.created});
     </insert>
 
     <select id="getUserByID" resultType="com.hongjiaoliu.lcn.entity.User">

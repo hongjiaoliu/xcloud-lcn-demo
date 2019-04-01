@@ -1,20 +1,68 @@
 server:
-  port: 11200  # HTTP (Tomcat) port
+  port: 11203  # HTTP (Tomcat) port
   tomcat:
     uri-encoding: UTF-8
-    max-http-header-size: 10000000
 
 spring:
   application:
-    name: SRV-C # Service registers under this name
+    name: S3 # Service registers under this name
   profiles:
     active: local
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:11120/eureka/ # 可配置多个地址
+  healthcheck:
+    enabled: true
+  instance:
+    prefer-ip-address: true   #服务之间调用时，指定IP调用
+    instance-id: 127.0.0.1:${server.port}
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 5
 
 jdbc:
-  driver:  com.mysql.jdbc.Driver
+  driver:  com.mysql.cj.jdbc.Driver
   url:  jdbc:mysql://127.0.0.1:3306/txlcn-demo?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
-  username:  test
-  password:  test
+  username: root
+  password: root
+
+tx-lcn:
+  client:
+    manager-address: 127.0.0.1:8070
+  ribbon:
+    loadbalancer:
+      dtx:
+        enabled: true
+hystrix:
+  threadpool:
+    default:
+      coreSize: 500  #核心线程数
+      maximumSize: 10000  #最大线程池大小
+      queueSizeRejectionThreshold: -1 #排队线程数量阈值，默认为5
+      maxQueueSize: -1  #  最大排队长度。默认-1
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:  #针对所有方法超时时间，这里也可以针对不同的命令设置超时时间
+            timeoutInMilliseconds: 60000
+          semaphore:  #最大并发数
+            maxConcurrentRequests: 200
+
+ribbon:
+  ReadTimeout: 50000
+  ConnectTimeout: 50000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+
+logging:
+  level:
+    com:
+      codingapi:
+        txlcn: DEBUG
+      hongjiaoliu: DEBUG
 
 ---
 #本地开发环境
@@ -28,6 +76,6 @@ eureka:
     enabled: true
   instance:
     prefer-ip-address: true   #服务之间调用时，指定IP调用
-    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    instance-id: 127.0.0.1:${server.port}
     lease-expiration-duration-in-seconds: 10
     lease-renewal-interval-in-seconds: 5

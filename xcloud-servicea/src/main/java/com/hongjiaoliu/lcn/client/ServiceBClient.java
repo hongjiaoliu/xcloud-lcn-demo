@@ -20,8 +20,8 @@ public interface ServiceBClient {
 	* @author:liuhongjiao
 	* @date: 2019/3/29 16:43
 	*/
-	@GetMapping(value="userRole/add1/{userID}/{role}")
-	public Integer addUserRole1(@PathVariable("userID") Long userID,@PathVariable("role") Integer role);
+	@GetMapping(value="userRole/add/{userID}/{role}")
+	public Integer addUserRole(@PathVariable("userID") Long userID,@PathVariable("role") Integer role);
 
 	/**
 	* 代码错误，例如出现 20/0
@@ -29,8 +29,8 @@ public interface ServiceBClient {
 	* @author:liuhongjiao
 	* @date: 2019/3/29 16:43
 	*/
-	@GetMapping(value="userRole/add2/{userID}/{role}")
-	public Integer addUserRole2(@PathVariable("userID") Long userID,@PathVariable("role") Integer role);
+	@GetMapping(value="userRole/addWithRuntimeException/{userID}/{role}")
+	public Integer addWithRuntimeException(@PathVariable("userID") Long userID,@PathVariable("role") Integer role);
 
 	/**
 	* sql 错误
@@ -38,6 +38,6 @@ public interface ServiceBClient {
 	* @author:liuhongjiao
 	* @date: 2019/3/29 16:44
 	*/
-	@GetMapping(value="userRole/add3/{userID}/{role}")
-	public Integer addUserRole3(@PathVariable("userID") Long userID,@PathVariable("role") Integer role);
+	@GetMapping(value="userRole/addWithSqlException/{userID}/{role}")
+	public Integer addWithSqlException(@PathVariable("userID") Long userID,@PathVariable("role") Integer role);
 }

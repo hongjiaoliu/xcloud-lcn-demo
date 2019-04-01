@@ -18,35 +18,72 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	/**
-	 * 场景1 ： S1 服务代码正确，S2 服务代码正确，------> S1 和 S2均可以顺利提交事务
+	 * 场景1 描述：S1-> S2 -> S3
+	 * 		S1、S2、S3 服务代码均正确
+	 * 	预期结果：S1、S2、S3均可顺利提交事务
 	 * @param name
 	 * @param age
 	 */
-	@GetMapping(value="add1/{name}/{age}")
-	public Integer add(@PathVariable("name") String name,@PathVariable("age") Integer age){
-		userService.addUser1(name,age);
-		return 1;
-	}
-	/**
-	 * 场景2 ： S1 服务代码正确，S2 出现运行时异常，-------> S1 和 S2 事务回滚
-	 * @param name
-	 * @param age
-	 */
-	@GetMapping(value="add2/{name}/{age}")
-	public Integer add2(@PathVariable("name") String name,@PathVariable("age") Integer age){
-		userService.addUser2(name,age);
+	@GetMapping(value="s1ToS2ToS3/{name}/{age}")
+	public Integer s1ToS2ToS3(@PathVariable("name") String name,@PathVariable("age") Integer age){
+		userService.s1ToS2ToS3(name,age);
 		return 1;
 	}
 
 	/**
-	 * 场景3：  S1 服务在调用S2 服务后出现运行时异常，S2 服务代码正确 -------->
+	 *  场景2 描述：S1-> S2 -> S3
+	 * 		S1 服务代码正确，S2 出现运行时异常，S3服务代码正确
+	 * 	预期结果：S1、S2 事务回滚，不调用S3
 	 * @param name
 	 * @param age
 	 */
-	@GetMapping(value="add3/{name}/{age}")
-	public Integer add3(@PathVariable("name") String name,@PathVariable("age") Integer age){
-		userService.addUser3(name,age);
-		return 1;
+	@GetMapping(value="s1ToS2withRuntimeExceptionToS3/{name}/{age}")
+	public Integer s1ToS2withRuntimeExceptionToS3(@PathVariable("name") String name,@PathVariable("age") Integer age){
+		userService.s1ToS2withRuntimeExceptionToS3(name,age);
+		return 2;
 	}
+
+	/**
+	 * 场景3 描述： S1-> S2 -> S3
+	 * 		S1、S2  服务代码正确，S3 服务出现异常
+	 * 	预期结果：S1、S2、S3 事务回滚
+	 * @return:
+	 * @author:liuhongjiao
+	 * @date: 2019/4/1 15:48
+	 */
+	@GetMapping(value="s1ToS2ToS3WithRuntimeException/{name}/{age}")
+	public Integer s1ToS2ToS3WithRuntimeException(@PathVariable("name") String name,@PathVariable("age") Integer age){
+		userService.s1ToS2ToS3WithRuntimeException(name,age);
+		return 3;
+	}
+
+	/**
+	 * 场景4 描述： S1-> S2 -> S3
+	 * 		S1 服务在调用S2 服务后出现运行时异常，S2 服务代码正确，S3服务代码正确
+	 * 	预期结果：	S1、S2 事务回滚，不调用S3
+	 * @param name
+	 * @param age
+	 */
+	@GetMapping(value="s1WithExceptionAfterCallS2/{name}/{age}")
+	public Integer s1WithExceptionAfterCallS2(@PathVariable("name") String name,@PathVariable("age") Integer age){
+		userService.s1WithExceptionAfterCallS2(name,age);
+		return 3;
+	}
+
+	/**
+	 * 场景5 描述： S1-> S2 -> S3
+	 *  	S1 服务在调用S3 服务后出现运行时异常，S2 服务代码正确，S3服务代码正确
+	 *  预期结果：	S1、S2 、S3 事务回滚
+	 * @return:
+	 * @author:liuhongjiao
+	 * @date: 2019/4/1 15:58
+	 */
+	@GetMapping(value="s1WithExceptionAfterCallS3/{name}/{age}")
+	public Integer s1WithExceptionAfterCallS3(@PathVariable("name") String name,@PathVariable("age") Integer age){
+		userService.s1WithExceptionAfterCallS3(name,age);
+		return 3;
+	}
+
+
 
 }

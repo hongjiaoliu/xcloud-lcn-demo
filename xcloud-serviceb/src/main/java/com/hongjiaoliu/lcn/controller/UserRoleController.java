@@ -24,9 +24,9 @@ public class UserRoleController {
 	 * @author:liuhongjiao
 	 * @date: 2019/3/29 16:43
 	 */
-	@GetMapping(value="add1/{userID}/{role}")
+	@GetMapping(value="add/{userID}/{role}")
 	public Integer add1(@PathVariable("userID") Long userID,@PathVariable("role") Integer role){
-		userRoleService.addUserRole1(userID,role);
+		userRoleService.addUserRole(userID,role);
 		return 1;
 	}
 	/**
@@ -35,9 +35,9 @@ public class UserRoleController {
 	 * @author:liuhongjiao
 	 * @date: 2019/3/29 16:43
 	 */
-	@GetMapping(value="add2/{userID}/{role}")
-	public Integer add2(@PathVariable("userID") Long userID,@PathVariable("role") Integer role){
-		userRoleService.addUserRole2(userID,role);
+	@GetMapping(value="addWithRuntimeException/{userID}/{role}")
+	public Integer addUserRoleWithRuntimeException(@PathVariable("userID") Long userID, @PathVariable("role") Integer role){
+		userRoleService.addUserRoleWithRuntimeException(userID,role);
 		return 2;
 	}
 	/**
@@ -46,9 +46,9 @@ public class UserRoleController {
 	 * @author:liuhongjiao
 	 * @date: 2019/3/29 16:44
 	 */
-	@GetMapping(value="add3/{userID}/{role}")
-	public Integer add3(@PathVariable("userID") Long userID,@PathVariable("role") Integer role){
-		userRoleService.addUserRole3(userID,role);
+	@GetMapping(value="addWithSqlException/{userID}/{role}")
+	public Integer addUserRoleWithSqlException(@PathVariable("userID") Long userID,@PathVariable("role") Integer role){
+		userRoleService.addUserRoleWithSqlException(userID,role);
 		return 3;
 	}
 }

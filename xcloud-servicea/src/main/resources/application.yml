@@ -1,5 +1,5 @@
 server:
-  port: 11200  # HTTP (Tomcat) port
+  port: 11201  # HTTP (Tomcat) port
   tomcat:
     uri-encoding: UTF-8
 
@@ -63,7 +63,7 @@ logging:
     com:
       codingapi:
         txlcn: DEBUG
-
+      hongjiaoliu: DEBUG
 ---
 #本地开发环境
 spring:

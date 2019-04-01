@@ -29,7 +29,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Override
 	@Transactional
 	@LcnTransaction(propagation = DTXPropagation.SUPPORTS)
-	public void addUserRole1(Long userID, Integer role) {
+	public void addUserRole(Long userID, Integer role) {
 		userRoleMapper.addUserRole(userID,role);
 	}
 
@@ -42,7 +42,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Override
 	@Transactional
 	@LcnTransaction(propagation = DTXPropagation.SUPPORTS)
-	public void addUserRole2(Long userID, Integer role) {
+	public void addUserRoleWithRuntimeException(Long userID, Integer role) {
 		userRoleMapper.addUserRole(userID,role);
 		int i = 20/0;
 	}
@@ -56,7 +56,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Override
 	@Transactional
 	@LcnTransaction(propagation = DTXPropagation.SUPPORTS)
-	public void addUserRole3(Long userID, Integer role) {
+	public void addUserRoleWithSqlException(Long userID, Integer role) {
 		userRoleMapper.addUserRoleWithSqlError(userID,role);
 	}
 

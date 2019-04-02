@@ -1,7 +1,5 @@
 package com.hongjiaoliu.lcn.service;
 
-import org.springframework.stereotype.Service;
-
 /**
  * ${DESCRIPTION}
  *
@@ -11,6 +9,6 @@ import org.springframework.stereotype.Service;
 
 public interface TaskService {
 
-	void add(String taskContent);
-	void addWithRuntimeException(String taskContent);
+	void add(String id, String taskContent);
+	void addWithRuntimeException(String id, String taskContent);
 }

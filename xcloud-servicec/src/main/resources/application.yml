@@ -68,6 +68,9 @@ logging:
 #本地开发环境
 spring:
   profiles: local
+  data:
+    mongodb:
+      uri: mongodb://test:test@127.0.0.1:27017/testmongodb
 eureka:
   client:
     serviceUrl:

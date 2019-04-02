@@ -123,8 +123,8 @@ public class UserServiceImpl implements UserService {
 	 * @date: 2019/4/1 15:58
 	 */
 	@Override
-	@LcnTransaction //分布式事务注解
-	@Transactional //本地事务注解
+	@LcnTransaction
+	@Transactional
 	public void s1WithExceptionAfterCallS3(String name, Integer age) {
 		User u = addUser(name, age);
 		Long userID = u.getId();

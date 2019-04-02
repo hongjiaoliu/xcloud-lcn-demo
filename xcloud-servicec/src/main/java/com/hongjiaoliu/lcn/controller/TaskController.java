@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 /**
  * @author liuhongjao
  * @date 2019/4/1 13:54
@@ -20,11 +22,13 @@ public class TaskController {
 
 	@GetMapping(value = "/add/{taskContent}")
 	public void add(@PathVariable("taskContent")String taskContent){
-		taskService.add(taskContent);
+		String id = UUID.randomUUID().toString();
+		taskService.add(id, taskContent);
 	}
 
 	@GetMapping(value = "/addWithRuntimeException/{taskContent}")
 	public void addWithRuntimeException(@PathVariable("taskContent")String taskContent){
-		taskService.addWithRuntimeException(taskContent);
+		String id = UUID.randomUUID().toString();
+		taskService.addWithRuntimeException(id, taskContent);
 	}
 }

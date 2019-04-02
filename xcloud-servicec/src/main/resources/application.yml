@@ -70,7 +70,8 @@ spring:
   profiles: local
   data:
     mongodb:
-      uri: mongodb://test:test@127.0.0.1:27017/testmongodb
+#      uri: mongodb://test:test@127.0.0.1:27017/testmongodb
+      uri: mongodb://localdev:qwertyqaz11@121.40.180.70:27017/local_mongodb
 eureka:
   client:
     serviceUrl:

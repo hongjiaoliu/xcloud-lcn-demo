@@ -10,7 +10,7 @@ import java.util.Date;
  * @date 2019/4/1 16:27
  */
 @Data
-@Document(collection = "Task_log")
+@Document(collection = "lcn_task_log")
 public class TaskLogBean {
 	private String logID;
 	private String txGroupID;//事务组ID
